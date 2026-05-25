@@ -1,0 +1,146 @@
+======================================================================
+  INVOICE EXPENSE CLASSIFIER — MODEL COMPARISON REPORT
+  Generated : 2026-05-25 21:27:10
+  Command   : python scripts/compare_models.py
+======================================================================
+  Dataset       : 491 total samples  (392 train / 99 test, 80/20 stratified split)
+  Categories    : ['Cloud/Software', 'Inventory', 'Logistics', 'Office Supplies', 'Travel', 'Utilities']
+  CV Strategy   : StratifiedKFold, 5 folds, random_state=42
+  Test split    : random_state=42, stratify=y
+======================================================================
+
+======================================================================
+  MODEL : TF-IDF + Logistic Regression
+======================================================================
+  CV Accuracy (5-fold)  : 0.8940 ± 0.0402
+  Per-fold scores       : ['0.9394', '0.9286', '0.8980', '0.8776', '0.8265']
+  CV wall-clock time    : 0.35s
+  Test Accuracy         : 0.8889  (88/99 correct)
+  Train time            : 65.9 ms
+  Inference time        : 0.943 ms  (99 samples, 9.52 µs/sample)
+
+  Classification Report:
+----------------------------------------------------------------------
+                     precision    recall  f1-score   support
+    
+     Cloud/Software     0.9375    0.9375    0.9375        16
+          Inventory     0.8235    0.8235    0.8235        17
+          Logistics     1.0000    0.8235    0.9032        17
+    Office Supplies     0.8421    0.9412    0.8889        17
+             Travel     1.0000    0.9375    0.9677        16
+          Utilities     0.7778    0.8750    0.8235        16
+    
+           accuracy                         0.8889        99
+          macro avg     0.8968    0.8897    0.8907        99
+       weighted avg     0.8966    0.8889    0.8902        99
+    
+----------------------------------------------------------------------
+
+  Confusion Matrix  (rows=actual, cols=predicted):
+  Labels: ['Cloud/Software', 'Inventory', 'Logistics', 'Office Supplies', 'Travel', 'Utilities']
+    [np.int64(15), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1)]
+    [np.int64(0), np.int64(14), np.int64(0), np.int64(2), np.int64(0), np.int64(1)]
+    [np.int64(1), np.int64(1), np.int64(14), np.int64(0), np.int64(0), np.int64(1)]
+    [np.int64(0), np.int64(1), np.int64(0), np.int64(16), np.int64(0), np.int64(0)]
+    [np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(15), np.int64(1)]
+    [np.int64(0), np.int64(1), np.int64(0), np.int64(1), np.int64(0), np.int64(14)]
+
+======================================================================
+  MODEL : TF-IDF + Naive Bayes (ComplementNB)
+======================================================================
+  CV Accuracy (5-fold)  : 0.8431 ± 0.0488
+  Per-fold scores       : ['0.8889', '0.8980', '0.8571', '0.7857', '0.7857']
+  CV wall-clock time    : 0.03s
+  Test Accuracy         : 0.7778  (77/99 correct)
+  Train time            : 4.2 ms
+  Inference time        : 0.823 ms  (99 samples, 8.32 µs/sample)
+
+  Classification Report:
+----------------------------------------------------------------------
+                     precision    recall  f1-score   support
+    
+     Cloud/Software     0.9333    0.8750    0.9032        16
+          Inventory     0.7500    0.5294    0.6207        17
+          Logistics     0.7500    0.7059    0.7273        17
+    Office Supplies     0.7143    0.8824    0.7895        17
+             Travel     0.8333    0.9375    0.8824        16
+          Utilities     0.7059    0.7500    0.7273        16
+    
+           accuracy                         0.7778        99
+          macro avg     0.7811    0.7800    0.7750        99
+       weighted avg     0.7798    0.7778    0.7732        99
+    
+----------------------------------------------------------------------
+
+  Confusion Matrix  (rows=actual, cols=predicted):
+  Labels: ['Cloud/Software', 'Inventory', 'Logistics', 'Office Supplies', 'Travel', 'Utilities']
+    [np.int64(14), np.int64(0), np.int64(0), np.int64(1), np.int64(1), np.int64(0)]
+    [np.int64(0), np.int64(9), np.int64(3), np.int64(3), np.int64(0), np.int64(2)]
+    [np.int64(1), np.int64(1), np.int64(12), np.int64(0), np.int64(2), np.int64(1)]
+    [np.int64(0), np.int64(1), np.int64(0), np.int64(15), np.int64(0), np.int64(1)]
+    [np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(15), np.int64(1)]
+    [np.int64(0), np.int64(1), np.int64(1), np.int64(2), np.int64(0), np.int64(12)]
+
+======================================================================
+  MODEL : Sentence Transformer (all-MiniLM-L6-v2) + Logistic Regression
+======================================================================
+  Encoding time (full dataset) : 0.54s  (491 samples)
+  Realistic per-sample latency : ~6.4 ms  (encode + LR predict)
+  CV Accuracy (5-fold)  : 0.9287 ± 0.0171
+  Per-fold scores       : ['0.9293', '0.9388', '0.9286', '0.9490', '0.8980']
+  CV wall-clock time    : 0.14s
+  Test Accuracy         : 0.8990  (89/99 correct)
+  Train time            : 22.7 ms
+  Inference time        : 0.288 ms  (99 samples, 2.91 µs/sample)
+
+  Classification Report:
+----------------------------------------------------------------------
+                     precision    recall  f1-score   support
+    
+     Cloud/Software     0.9375    0.9375    0.9375        16
+          Inventory     0.8824    0.8824    0.8824        17
+          Logistics     0.9333    0.8235    0.8750        17
+    Office Supplies     0.9375    0.8824    0.9091        17
+             Travel     0.9333    0.8750    0.9032        16
+          Utilities     0.8000    1.0000    0.8889        16
+    
+           accuracy                         0.8990        99
+          macro avg     0.9040    0.9001    0.8993        99
+       weighted avg     0.9044    0.8990    0.8990        99
+    
+----------------------------------------------------------------------
+
+  Confusion Matrix  (rows=actual, cols=predicted):
+  Labels: ['Cloud/Software', 'Inventory', 'Logistics', 'Office Supplies', 'Travel', 'Utilities']
+    [np.int64(15), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(1)]
+    [np.int64(0), np.int64(15), np.int64(0), np.int64(1), np.int64(0), np.int64(1)]
+    [np.int64(1), np.int64(0), np.int64(14), np.int64(0), np.int64(1), np.int64(1)]
+    [np.int64(0), np.int64(2), np.int64(0), np.int64(15), np.int64(0), np.int64(0)]
+    [np.int64(0), np.int64(0), np.int64(1), np.int64(0), np.int64(14), np.int64(1)]
+    [np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(0), np.int64(16)]
+
+======================================================================
+  SUMMARY COMPARISON TABLE
+======================================================================
+  Model                                                CV Acc   Test Acc   Train(ms)   Infer(ms)
+  ----------------------------------------------------------------------
+  TF-IDF + Logistic Regression                         0.8940
+                                                                  0.8889        65.9       0.943
+  ----------------------------------------------------------------------
+  TF-IDF + Naive Bayes (ComplementNB)                  0.8431
+                                                                  0.7778         4.2       0.823
+  ----------------------------------------------------------------------
+  Sentence Transformer (all-MiniLM-L6-v2) + LR         0.9287 ◄ BEST
+                                                                  0.8990 ◄ BEST        22.7       0.288  (~6.4ms/sample)
+  ----------------------------------------------------------------------
+  ◄ BEST = highest value in that column
+======================================================================
+
+  RECOMMENDATION
+----------------------------------------------------------------------
+  Best CV accuracy  : 'Sentence Transformer (all-MiniLM-L6-v2) + LR' → 0.9287
+
+  For production (fast inference) :  tfidf_lr  (POST /predict?model=tfidf_lr)
+  For best accuracy               :  sentence_transformer
+  For semantic understanding      :  transformer  (POST /predict?model=transformer)
+======================================================================
