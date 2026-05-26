@@ -420,6 +420,4 @@ Unknown fields in the request body are silently ignored (Pydantic's default beha
 
 ---
 
-## Licence
 
-MIT
